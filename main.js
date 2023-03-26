@@ -87,5 +87,15 @@ const app = Vue.createApp({
     }
 })
 
+app.component('my-turn-info',{
+    // data(){
+    //     return{
+    //         turn:false
+    //     }
+    // },
+    props:['content'],
+    template:`<h2 class="text-end">輪到：{{content}}</h2>`
+})
+
 app.mount('#app')
 
