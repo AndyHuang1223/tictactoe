@@ -4,11 +4,16 @@ const app = Vue.createApp({
             items: [],
             stepCount: 0,
             isXTurn: false,
-            isTie:false
+            isTie:false,
+            myModal:null
         }
     },
     mounted() {
         this.initialData()
+        this.$nextTick(()=>{
+            this.myModal = new bootstrap.Modal(this.$refs.myTestModal)
+        })
+
     },
     methods: {
         initialData() {
@@ -30,15 +35,15 @@ const app = Vue.createApp({
             this.checkGameStatus()
         },
         restart() {
-            myModel.toggle()
+            this.myModal.toggle()
             this.initialData()
         },
         checkGameStatus() {
             if (this.isEndGame) {
-                myModel.toggle()
+                this.myModal.toggle()
             } else if (this.stepCount >= 9) {
                 this.isTie = true
-                myModel.toggle()
+                this.myModal.toggle()
             }
         },
         isRowCheckEnd() {
@@ -84,4 +89,3 @@ const app = Vue.createApp({
 
 app.mount('#app')
 
-const myModel = new bootstrap.Modal(document.getElementById('notification-modal'))
