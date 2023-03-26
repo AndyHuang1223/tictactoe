@@ -4,13 +4,13 @@ const app = Vue.createApp({
             items: [],
             stepCount: 0,
             isXTurn: false,
-            isTie:false,
-            myModal:null
+            isTie: false,
+            myModal: null
         }
     },
     mounted() {
         this.initialData()
-        this.$nextTick(()=>{
+        this.$nextTick(() => {
             this.myModal = new bootstrap.Modal(this.$refs.myTestModal)
         })
 
@@ -87,14 +87,20 @@ const app = Vue.createApp({
     }
 })
 
-app.component('my-turn-info',{
-    // data(){
-    //     return{
-    //         turn:false
-    //     }
-    // },
-    props:['content'],
-    template:`<h2 class="text-end">輪到：{{content}}</h2>`
+app.component('my-turn-info', {
+    props: {
+        isXTurn: {
+            type: Boolean,
+            required: true
+        }
+    },
+    template: `<h2 class="text-end">輪到：{{message}}</h2>`,
+    computed: {
+        message() {
+            return this.isXTurn ? 'X' : 'O'
+        }
+
+    }
 })
 
 app.mount('#app')
